@@ -14,6 +14,6 @@ cd "$1" || exit
 # Open tabs in xfce4-terminal
 xfce4-terminal --disable-server --hide-menubar \
   --command "bash -c 'sleep 0.1; exit'" \
-  --command='bash -c "xfce4-terminal --drop-down-split=vertical"'
+  --tab --title="Main" --working-directory="$PWD" \
   --tab --title="Evidence" --working-directory="$PWD/Evidence" \
   --tab --title="Utils" --working-directory="$PWD/Utils" & disown
