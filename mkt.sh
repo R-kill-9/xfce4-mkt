@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Verift the passed argument
+# Verify the passed argument
 if [ -z "$1" ]; then
   echo "Creating: $0 <directory>"
   exit 1
@@ -17,3 +17,11 @@ xfce4-terminal --disable-server --hide-menubar \
   --tab --title="Main" --working-directory="$PWD" \
   --tab --title="Evidence" --working-directory="$PWD/Evidence" \
   --tab --title="Utils" --working-directory="$PWD/Utils" & disown
+
+# Wait a bit to ensure the terminal window exists
+sleep 1
+
+# Move focus to the Main tab (first tab)
+xdotool key --clearmodifiers ctrl+Page_Up
+sleep 0.1
+xdotool key --clearmodifiers ctrl+Page_Up
