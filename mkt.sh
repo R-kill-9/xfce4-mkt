@@ -6,22 +6,59 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
+BASE_DIR="$1"
+
 # Create subdirectories
-mkdir -p "$1"/{Evidence,Utils}
-cd "$1" || exit
+mkdir -p "$BASE_DIR"/{Evidence,Utils}
 
+# Open QTerminal with the first tab in BASE_DIR
+qterminal --working-directory="$BASE_DIR" &
 
-# Open tabs in xfce4-terminal
-xfce4-terminal --disable-server --hide-menubar \
-  --command "bash -c 'sleep 0.1; exit'" \
-  --tab --title="Main" --working-directory="$PWD" \
-  --tab --title="Evidence" --working-directory="$PWD/Evidence" \
-  --tab --title="Utils" --working-directory="$PWD/Utils" & disown
-
-# Wait a bit to ensure the terminal window exists
+# Wait for the terminal to open
 sleep 1
 
-# Move focus to the Main tab (first tab)
+# Rename the first tab to "Main"
+xdotool key --clearmodifiers alt+shift+s
+sleep 0.1
+xdotool type "Main"
+xdotool key Return
+sleep 0.2
+
+# Open tab for Evidence
+xdotool key --clearmodifiers ctrl+shift+t
+sleep 0.2
+xdotool key --clearmodifiers alt+shift+s
+sleep 0.1
+xdotool type "Evidence"
+xdotool key Return
+sleep 0.2
+# Change directory to Evidence (absolute path)
+xdotool type "cd '$BASE_DIR/Evidence'"
+xdotool key Return
+xdotool key --clearmodifiers ctrl+L
+sleep 0.1
+
+
+# Open tab for Utils
+xdotool key --clearmodifiers ctrl+shift+t
+sleep 0.2
+xdotool key --clearmodifiers alt+shift+s
+sleep 0.1
+xdotool type "Utils"
+xdotool key Return
+sleep 0.1
+# Change directory to Utils (absolute path)
+xdotool type "cd '$BASE_DIR/Utils'"
+xdotool key Return
+sleep 0.1
+xdotool key --clearmodifiers ctrl+L
+sleep 0.1
+
+# Return focus to Main tab
 xdotool key --clearmodifiers ctrl+Page_Up
 sleep 0.1
 xdotool key --clearmodifiers ctrl+Page_Up
+xdotool type "cd '$BASE_DIR'"
+xdotool key Return
+sleep 0.1
+xdotool key --clearmodifiers ctrl+L
