@@ -48,7 +48,7 @@ xdotool type "Utils"
 xdotool key Return
 sleep 0.1
 # Change directory to Utils (absolute path)
-xdotool type "cd '$BASE_DIR/Utils'"
+xdotool type "cd '../Utils'"
 xdotool key Return
 sleep 0.05
 xdotool key --clearmodifiers ctrl+L
