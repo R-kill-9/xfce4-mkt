@@ -64,3 +64,7 @@ sleep 0.05
 xdotool key --clearmodifiers ctrl+L
 sleep 0.05
 xdotool key --clearmodifiers ctrl+R
+xdotool type "cd '$BASE_DIR'"
+xdotool key Return
+sleep 0.05
+xdotool key --clearmodifiers ctrl+L
